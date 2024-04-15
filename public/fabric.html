@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Fabric.js Demo</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <style>
+        button {
+            background-color: #ffffff;
+            border-radius: 4px;
+            border: 1px solid #dcdcdc;
+            font-weight: bold;
+            padding: 5px 20px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #f6f6f6;
+        }
+    </style>
+</head>
+<body>
+    <input type="file" id="file-input" accept="image/*">
+    <button id="draw">Erase</button>
+    <button id="api">Send to API</button>
+    <button id="remove" disabled="disabled">Remove</button>
+    <br><br>
+    <div>
+        <canvas id="canvas" width="500" height="333"></canvas>
+    </div>
+    <br>
+    <div id="result-image"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fabric@5.2.4/dist/fabric.min.js"></script>
+    <script src="/scripts/fabric.js"></script>
+</body>
+</html>
