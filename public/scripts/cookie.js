@@ -1,16 +1,18 @@
-function getCookie(k){
-  let s=k+"=";
-  let p=document.cookie.indexOf(s); 
-  if( p>0 ) {
-    p=document.cookie.indexOf(' '+s);  
+function getCookie(cookieName){
+  let defSubstr = cookieName + "=";
+  let defSubstrIdx = document.cookie.indexOf(defSubstr); 
+  if (defSubstrIdx > 0) {
+    defSubstrIdx = document.cookie.indexOf(' ' + defSubstr);  
   }
-  if( p>=0 ) {
-    if(p>0){
-      p++;
+  if (defSubstrIdx >= 0) {
+    if (defSubstrIdx > 0) {
+      defSubstrIdx++;
     }
-    p+=s.length;  
-    let q=document.cookie.indexOf(";", p);
-    return (q<0)?document.cookie.substring(p): document.cookie.substring(p, q); 
+    defSubstrIdx += defSubstr.length;  
+    let valSubStrIdx = document.cookie.indexOf(";", defSubstrIdx);
+    return ( valSubStrIdx < 0 ) 
+      ? document.cookie.substring(defSubstrIdx) 
+      : document.cookie.substring(defSubstrIdx, valSubStrIdx); 
   } 
   return null;
 }

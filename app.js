@@ -5,6 +5,7 @@ import multer from 'multer';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 import FormData from 'form-data';
+import 'dotenv/config';
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -22,11 +23,13 @@ app.use(express.static('public'));
 app.use(express.text());
 
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + "/public/index.html")
+  res.set('Content-Type', 'text/html');
+  res.sendFile(__dirname + "/public/index.html");
 })
 
 app.get('/upload', (req, res) => {
-  res.sendFile(__dirname + "/public/upload.html")
+  res.set('Content-Type', 'text/html');
+  res.sendFile(__dirname + "/public/upload.html");
 })
 
 app.post('/api/upload', upload.single('main-image'), (req, res) => {

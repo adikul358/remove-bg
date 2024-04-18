@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "start": "bun run app.js",
-    "dev": "nodemon --ext *"
+    "dev": "bun run --hot app.js"
   },
   "devDependencies": {
     "@types/bun": "latest"
@@ -15,14 +15,11 @@
   "dependencies": {
     "axios": "^1.6.8",
     "body-parser": "^1.20.2",
-    "connect-livereload": "^0.6.1",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "fabric": "^5.3.0",
     "form-data": "^4.0.0",
-    "livereload": "^0.9.3",
     "multer": "^1.4.5-lts.1",
-    "nodemon": "^3.1.0",
     "uuid": "9.0.0"
   }
 }
