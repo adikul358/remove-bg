@@ -11,7 +11,6 @@
     
     <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-    <link rel="stylesheet" href="styles/styles.css" />
     <script src="/scripts/cookie.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -110,40 +109,34 @@
         <canvas id="canvas"></canvas>
       </div>
       <div class="w-[210px] flex-shrink-0 pb-6 flex flex-col">
-        <div class="grid grid-cols-2 gap-x-2 font-medium">
-        
-          <button id="erase" class="bg-white border-[3px] border-[rgb(217,0,0)] w-full py-2 rounded-lg mt-3 flex flex-col items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="mb-1 w-[2em] h-[2em]">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-            </svg>
-            Erase
-          </button>
-          <button id="restore" class="bg-white border-[3px] border-[rgb(4,200,0)] w-full py-2 rounded-lg mt-3 flex flex-col items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="mb-1 w-[2em] h-[2em]">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-            </svg>
-            Restore
-          </button>
+        <button id="erase" class="bg-white border-[3px] border-[rgb(217,0,0)] w-full py-2 rounded-full mt-3 flex flex-row items-center justify-center font-medium">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="mr-2 w-[1.2em] h-[1.2em]">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+          </svg>
+          Erase
+        </button>
+        <div id="brushMenu" class="hidden flex-row items-center mt-2">
+          <label class="font-medium flex-shrink-0 mr-2" for="brushSize">Brush</label>
+          <input class="range w-full h-2 bg-gray-300 accent-blue-700 border-none rounded-lg cursor-pointer" type="range" id="brushSize" name="brushSize" min="1" max="50" value="10">
         </div>
         <button id="reset" class="bg-gray-200 font-medium w-full py-2 rounded-full mt-3 flex flex-row items-center justify-center">
           Reset
         </button>
-        <button class="bg-blue-700 text-white w-full py-2 rounded-full mt-3 flex flex-row items-center justify-center">
+        <button id="doneBtn" class="bg-blue-700 text-white w-full py-2 rounded-full mt-3 flex flex-row items-center justify-center">
           Done
         </button>
         <hr class="border-[1px] border-gray-300 w-3/4 my-6 mx-auto">
-        <a href="" id="downloadBtn" download>
-          <button class="bg-blue-700 text-white w-full py-2 rounded-full flex flex-row items-center justify-center">
-            <svg class="mr-2" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" data-darkreader-inline-fill="" data-darkreader-inline-stroke="" style="--darkreader-inline-fill: currentColor; --darkreader-inline-stroke: currentColor;"><path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"></path></svg>
-            Download
-          </button>
-        </a>
+        <button id="downloadBtn" class="bg-blue-700 text-white w-full py-2 rounded-full flex flex-row items-center justify-center">
+          <svg class="mr-2" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+            <path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"></path>
+          </svg>
+          Download
+        </button>
       </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/fabric@5.2.4/dist/fabric.min.js"></script>
-    <!-- <script src="scripts/api.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js" integrity="sha512-CeIsOAsgJnmevfCi2C7Zsyy6bQKi43utIjdA87Q0ZY84oDqnI0uwfM9+bKiIkI75lUeI00WG/+uJzOmuHlesMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="module" src="scripts/fabric.js"></script>
     <script>
     </script>

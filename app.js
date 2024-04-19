@@ -20,6 +20,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage }); 
 
 app.use(express.static('public'));
+app.use(express.json({limit: '50mb'}));
 app.use(express.text());
 
 app.get('/', (req, res) => {
@@ -61,6 +62,29 @@ app.post('/api/removebg', async (req, res) => {
   fs.writeFileSync(outputPath, res_rb.data);
   res.set("Content-Type", "text/plain")
   res.send(outputFile);
+})
+
+app.post('/api/removebrush', async (req, res) => {
+  const base64Data = req.body.imageData;
+  // const base64Data = req.body.imageData.split(',')[1];
+  const res_rb = await axios({
+    method: 'post',
+    url: 'https://api.remove.bg/v1.0/removebg',
+    headers: {
+      'Content-Type': 'application/json',
+			'X-Api-Key': process.env.REMOVEBG_API_KEY,
+    },
+    data: JSON.stringify({
+      image_file_b64: base64Data,
+      format: "png",
+      size: "auto"
+    }),
+    responseType: 'arraybuffer',
+	})
+    .catch(e => console.dir(JSON.stringify(e.response.data.errors)));
+
+  res.set("Content-Type", "image/png");
+  res.end(res_rb.data, "binary");
 })
 
 app.post('/api/preview', (req, res) => {
