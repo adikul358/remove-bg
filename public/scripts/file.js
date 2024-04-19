@@ -2,6 +2,10 @@ const dropArea = document.querySelector(".drag-area");
 const dragFile = dropArea.querySelector(".drag-file");
 const button = dropArea.querySelector(".file-input-button");
 const input = dropArea.querySelector(".file-input");
+const progressBar = document.getElementById("progress");
+const processProgressBar = progressBar.cloneNode(true);
+processProgressBar.classList.remove("hidden");
+
 
 button.onclick = () => {
   input.click();
@@ -19,7 +23,7 @@ dropArea.addEventListener("dragover", (event) => {
   dropArea.classList.add("border-4");
   dragFile.textContent = "Release to upload file";
 	for (el of document.querySelectorAll(".upload-supplement")) {
-		el.classList.add("invisible")
+		el.classList.add("hidden")
 	}
 });
 
@@ -28,7 +32,7 @@ dropArea.addEventListener("dragleave", () => {
   dropArea.classList.remove("border-4");
   dragFile.textContent = "Drag and drop image here";
 	for (el of document.querySelectorAll(".upload-supplement")) {
-		el.classList.remove("invisible")
+		el.classList.remove("hidden")
 	}
 });
 
@@ -39,7 +43,7 @@ dropArea.addEventListener("drop", (e) => {
   dropArea.classList.remove("border-4");
   dragFile.textContent = "Drag and drop image here";
 	for (el of document.querySelectorAll(".upload-supplement")) {
-		el.classList.remove("invisible")
+		el.classList.remove("hidden")
 	}
   setttingFileValue(target);
 });
@@ -75,15 +79,18 @@ const setttingFileValue = async (target) => {
 		formData.append("size", "auto");
 		
 		dragFile.textContent = "Uploading...";
+		progressBar.classList.remove("hidden")
 		for (el of document.querySelectorAll(".upload-supplement")) {
-			el.classList.add("invisible")
+			el.classList.add("hidden")
 		}
 
 		const upload_res = await (await fetch("/api/upload", {
 			method: "POST",
 			body: formData,
 		})).text()
+		progressBar.classList.add("hidden")
 
+		dropArea.appendChild(processProgressBar);
 		dragFile.textContent = "Processing...";
 
 		const preview_res = await (await fetch("/api/removebg", {

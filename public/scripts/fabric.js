@@ -25,7 +25,7 @@ brushSizeInput.addEventListener("change", (e) => {
 })
 
 downloadBtn.addEventListener("click", () => {
-  canvas.backgroundImage.opacity = 0
+  // canvas.backgroundImage.opacity = 0
   canvas.forEachObject((o) => {
     if (o.path) {
       o.opacity = 0
@@ -46,18 +46,18 @@ downloadBtn.addEventListener("click", () => {
       o.opacity = 1
     }
   })
-  canvas.backgroundImage.opacity = 0.2
+  // canvas.backgroundImage.opacity = 0.2
 })
 
 doneBtn.addEventListener("click", async () => {
   doneBtn.textContent = "Processing..."
-  canvas.backgroundImage.opacity = 0
+  // canvas.backgroundImage.opacity = 0
   const imageData = canvas.toDataURL({
       format: 'png',
       quality: 1
   });
 
-  canvas.backgroundImage.opacity = 0.2
+  // canvas.backgroundImage.opacity = 0.2
 
   let new_img = await (await fetch("/api/removebrush", {
     method: "POST",
@@ -133,18 +133,18 @@ canvas.setHeight(parentDiv.clientHeight);
 
 const { ogURL, prevURL } = await getImageURLs()
 let scaleRatio;
-fabric.Image.fromURL(ogURL, function(img) {
-  scaleRatio = Math.min(canvas.width / img.width, canvas.height / img.height);
-  canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
-      opacity: 0.2,
-      scaleX: scaleRatio,
-      scaleY: scaleRatio,
-      left: canvas.width / 2,
-      top: canvas.height / 2,
-      originX: 'middle',
-      originY: 'middle'
-  });
-})
+// fabric.Image.fromURL(ogURL, function(img) {
+//   scaleRatio = Math.min(canvas.width / img.width, canvas.height / img.height);
+//   canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
+//       opacity: 0.2,
+//       scaleX: scaleRatio,
+//       scaleY: scaleRatio,
+//       left: canvas.width / 2,
+//       top: canvas.height / 2,
+//       originX: 'middle',
+//       originY: 'middle'
+//   });
+// })
 fabric.Image.fromURL(prevURL, function(img) {
   scaleRatio = Math.min(canvas.width / img.width, canvas.height / img.height);
   img.set({
