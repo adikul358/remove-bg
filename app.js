@@ -7,6 +7,7 @@ import axios from 'axios';
 import FormData from 'form-data';
 import 'dotenv/config';
 
+const __dirname = import.meta.dirname;
 const app = express();
 const port = process.env.PORT || 8080;
 const storage = multer.diskStorage({  
