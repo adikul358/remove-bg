@@ -46,7 +46,7 @@ app.post('/api/removebg', async (req, res) => {
   formData.append('size', 'auto');
   formData.append('image_file', fs.createReadStream(inputPath), path.basename(inputPath));
   const res_rb = await axios({
-    method: 'post',
+    method: 'POST',
     url: 'https://api.remove.bg/v1.0/removebg',
     data: formData,
     responseType: 'arraybuffer',
