@@ -7,7 +7,9 @@ import axios from 'axios';
 import FormData from 'form-data';
 import 'dotenv/config';
 
-const __dirname = import.meta.dirname;
+const dirname = import.meta.dirname;
+console.log(dirname)
+
 const app = express();
 const port = process.env.PORT || 8080;
 const storage = multer.diskStorage({  
@@ -26,12 +28,12 @@ app.use(express.text());
 
 app.get('/', (req, res) => {
   res.set('Content-Type', 'text/html');
-  res.sendFile(__dirname + "/public/index.html");
+  res.sendFile(dirname + "/public/index.html");
 })
 
 app.get('/upload', (req, res) => {
   res.set('Content-Type', 'text/html');
-  res.sendFile(__dirname + "/public/upload.html");
+  res.sendFile(dirname + "/public/upload.html");
 })
 
 app.post('/api/upload', upload.single('main-image'), (req, res) => {
@@ -41,7 +43,7 @@ app.post('/api/upload', upload.single('main-image'), (req, res) => {
 })
 
 app.post('/api/removebg', async (req, res) => {
-  const inputPath = `${__dirname}/uploads/${req.body}`
+  const inputPath = `${dirname}/uploads/${req.body}`
   const formData = new FormData();
   formData.append('format', 'png');
   formData.append('size', 'auto');
@@ -58,7 +60,7 @@ app.post('/api/removebg', async (req, res) => {
     encoding: null
 	}).catch(e => console.error(e))
   const outputFile = uuidv4() + ".png"
-  const outputPath = path.join(__dirname, "/uploads/" + outputFile)
+  const outputPath = path.join(dirname, "/uploads/" + outputFile)
   console.log(outputFile)
   fs.writeFileSync(outputPath, res_rb.data);
   res.set("Content-Type", "text/plain")
@@ -89,7 +91,7 @@ app.post('/api/removebrush', async (req, res) => {
 })
 
 app.post('/api/preview', (req, res) => {
-  const filename = `${__dirname}/uploads/${req.body}`
+  const filename = `${dirname}/uploads/${req.body}`
   res.sendFile(filename)
 })
 
