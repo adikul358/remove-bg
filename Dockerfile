@@ -5,7 +5,9 @@ WORKDIR /app
 COPY package.json .
 
 RUN npm install
+RUN mkdir -p uploads 
 
 COPY . ./
 
-CMD node app.js
+
+CMD npm run prod
