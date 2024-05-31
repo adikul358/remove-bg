@@ -18,6 +18,7 @@
   transition: width 0.8s ease;
   -webkit-animation: mymove 5s;
   animation: mymove 5s;
+  animation-fill-mode: forwards;
   position: relative;
 }
 
